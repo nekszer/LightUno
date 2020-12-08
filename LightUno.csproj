@@ -38,6 +38,8 @@ En XAML cambiar de Page a
 
 Si completaste correctamente todos los pasos, felicidades! ahora puedes hacer uso de MVVM en el proyecto.</Description>
     <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/nekszer/LightUno</RepositoryUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="LightInject" Version="6.4.0" />
