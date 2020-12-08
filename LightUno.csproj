@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+  <!--
+	Adding project references to this project requires some manual adjustments.
+	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
+	-->
+  <PropertyGroup>
+    <TargetFrameworks>uap10.0.17763;netstandard2.0;xamarinios10;xamarinmac20;MonoAndroid11.0;monoandroid10.0</TargetFrameworks>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Daniel López</Authors>
+    <Description>Pequeño framework MVVM apenas en construcción para Uno Platform
+
+Uso rápido
+protected override void OnLaunched(LaunchActivatedEventArgs e)
+{
+    new AppRoutes(LightUno.Application.RoutingService); // crea la clase approutes
+    new AppDependencies(LightUno.Application.Container); // crea la clase appdependencies
+    // ...
+
+    // Cambiar la forma de obtener la pagina principal de la app
+    var defaultview = LightUno.Application.RoutingService.DefaultView;
+    rootFrame.Navigate(defaultview, e.Arguments);
+}
+
+AppDependencies:
+Son todos los servicios que generes para tu app, usando el patron de diseño IoC
+
+AppRoutes:
+Son todas las rutas que tendra tu app, cada ruta enlaza una vista y un viewmodel.
+
+En C# cada página debe herdad de  [ViewBase, IViewBase]
+public sealed partial class MainPage : ViewBase, IViewBase
+
+En XAML cambiar de Page a
+&lt;Views:ViewBase xmlns:Views="using:LightUno.Views"
+
+Si completaste correctamente todos los pasos, felicidades! ahora puedes hacer uso de MVVM en el proyecto.</Description>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="LightInject" Version="6.4.0" />
+    <PackageReference Include="TinyIoC" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Uno.UI" Version="3.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Z:\NEKSZ\Nuget\packages\dryioc\4.5.2\contentFiles\cs\netstandard2.0\DryIoc\Container.cs" />
+    <Compile Remove="Z:\NEKSZ\Nuget\packages\dryioc\4.5.2\contentFiles\cs\netstandard2.0\DryIoc\Expression.cs" />
+    <Compile Remove="Z:\NEKSZ\Nuget\packages\dryioc\4.5.2\contentFiles\cs\netstandard2.0\DryIoc\FastExpressionCompiler.cs" />
+    <Compile Remove="Z:\NEKSZ\Nuget\packages\dryioc\4.5.2\contentFiles\cs\netstandard2.0\DryIoc\ImTools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MarkupExtensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+</Project>
