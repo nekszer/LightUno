@@ -1,6 +1,11 @@
 ## MVVM
 Pequeño framework MVVM apenas en construcción para Uno Platform
 
+### NUGET
+```
+Install-Package LightUno
+```
+
 ### Uso rápido
 ```
 protected override void OnLaunched(LaunchActivatedEventArgs e)
